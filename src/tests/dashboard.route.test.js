@@ -27,29 +27,69 @@ describe("dashboard.route.js", () => {
     await mongoServer.stop();
   });
 
+  beforeEach(async () => {
+    const mockWorkout = {
+      name: "ben",
+      exercises: [
+        "squats",
+        "jumping squats",
+        "lunges",
+        "v ups",
+        "climbers",
+        "bridges"
+      ],
+      duration: "15",
+      date: "01/04/2020"
+    };
+
+    await Workout.create(mockWorkout);
+  });
+
+  afterEach(async () => {
+    jest.resetAllMocks();
+    await Workout.deleteMany();
+  });
+
   it("GET /dashboard should return status 200 OK and all workouts posted", async () => {
     const mockWorkouts = [
       {
-        name: "ben",
-        exercises: "squats, jumping squats, lunges, v ups, climbers",
-        duration: "15",
-        date: "02/04/2020"
+        name: "jerry",
+        exercises: [
+          "squats",
+          "jumping squats",
+          "lunges",
+          "v ups",
+          "climbers",
+          "bridges"
+        ],
+        duration: 15,
+        date: "02 Apr 2020"
       },
       {
         name: "jane",
-        exercises: "squats, jumping squats, lunges, v ups, climbers",
-        duration: "15",
-        date: "02/04/2020"
+        exercises: [
+          "squats",
+          "jumping squats",
+          "lunges",
+          "v ups",
+          "climbers",
+          "bridges"
+        ],
+        duration: 15,
+        date: "02 Apr 2020"
       }
     ];
+
     const origFunction = Workout.find;
     Workout.find = jest.fn();
     Workout.find.mockImplementationOnce(() => {
       return mockWorkouts;
     });
+
     const { body: workoutCollection } = await request(app)
       .get("/dashboard")
       .expect(200);
+
     expect(workoutCollection).toEqual(
       expect.arrayContaining([
         expect.objectContaining(mockWorkouts[0]),
@@ -58,5 +98,27 @@ describe("dashboard.route.js", () => {
     );
 
     Workout.find = origFunction;
+  });
+
+  it("POST /dashboard should return status 201 and the newly created workout", async () => {
+    const mockWorkout = {
+      name: "johan",
+      exercises: [
+        "climbers",
+        "squats",
+        "jumping squats",
+        "v ups",
+        "lunges",
+        "bridges"
+      ],
+      duration: 15,
+      date: "02 Apr 2020"
+    };
+
+    const { body } = await request(app)
+      .post("/dashboard")
+      .send(mockWorkout)
+      .expect(201);
+    expect(body).toMatchObject(mockWorkout);
   });
 });
