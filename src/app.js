@@ -5,8 +5,12 @@ const cors = require("cors");
 const dashboardRouter = require("./routes/dashboard.route");
 
 const corsOptions = {
-  origin: ["http://localhost:3000",
-  "http://localhost:3001"],
+  origin: [
+    process.env.HIIT_FRONTEND_LOCALHOST,
+    "http://localhost:3000",
+    "http://localhost:3001"
+  ],
+  allowedHeaders: "content-type",
   credentials: true
 };
 
