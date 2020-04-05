@@ -1,19 +1,15 @@
 require("dotenv").config();
 const express = require("express");
-const app = express();
 const cors = require("cors");
 const dashboardRouter = require("./routes/dashboard.route");
 
 const corsOptions = {
-  origin: [
-    process.env.HIIT_FRONTEND_LOCALHOST,
-    "http://localhost:3000",
-    "http://localhost:3001"
-  ],
+  origin: process.env.REACT_APP_HIIT_FRONTEND_URL || "http://localhost:3000",
   allowedHeaders: "content-type",
   credentials: true
 };
 
+const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
 
