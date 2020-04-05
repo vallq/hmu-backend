@@ -12,7 +12,7 @@ router.post("/", async (req, res, next) => {
   const newWorkout = new Workout(req.body);
   await newWorkout.save();
   res.status(201).send(newWorkout);
-})
+});
 
 router.use((err, req, res, next) => {
   if (err.name === "ValidationError") {

@@ -2,7 +2,6 @@ const request = require("supertest");
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const app = require("../app");
-const dashboard = require("../routes/dashboard.route");
 const Workout = require("../models/workout.model");
 
 mongoose.set("useNewUrlParser", true);
