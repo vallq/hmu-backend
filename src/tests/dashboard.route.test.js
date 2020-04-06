@@ -27,6 +27,7 @@ describe("dashboard.route.js", () => {
   });
 
   beforeEach(async () => {
+    const date = new Date();
     const mockWorkout = {
       name: "ben",
       exercises: [
@@ -38,8 +39,9 @@ describe("dashboard.route.js", () => {
         "bridges"
       ],
       duration: "15",
-      date: "04/01/2020",
-      time: "5:38:54 PM"
+      dateTimeObj: date.toString(),
+      date: date.toDateString(),
+      time: date.toLocaleTimeString()
     };
 
     await Workout.create(mockWorkout);
@@ -51,6 +53,7 @@ describe("dashboard.route.js", () => {
   });
 
   it("GET /dashboard should return status 200 OK and all workouts posted", async () => {
+    const date = new Date();
     const mockWorkouts = [
       {
         name: "jerry",
@@ -63,8 +66,9 @@ describe("dashboard.route.js", () => {
           "bridges"
         ],
         duration: 15,
-        date: "02 Apr 2020",
-        time: "5:38:54 PM"
+        dateTimeObj: date.toString(),
+        date: date.toDateString(),
+        time: date.toLocaleTimeString()
       },
       {
         name: "jane",
@@ -77,8 +81,9 @@ describe("dashboard.route.js", () => {
           "bridges"
         ],
         duration: 15,
-        date: "02 Apr 2020",
-        time: "5:38:54 PM"
+        dateTimeObj: date.toString(),
+        date: date.toDateString(),
+        time: date.toLocaleTimeString()
       }
     ];
 
@@ -103,6 +108,7 @@ describe("dashboard.route.js", () => {
   });
 
   it("POST /dashboard should return status 201 and the newly created workout", async () => {
+    const date = new Date();
     const mockWorkout = {
       name: "johan",
       exercises: [
@@ -114,8 +120,9 @@ describe("dashboard.route.js", () => {
         "bridges"
       ],
       duration: 15,
-      date: "02 Apr 2020",
-      time: "5:38:54 PM"
+      dateTimeObj: date.toString(),
+      date: date.toDateString(),
+      time: date.toLocaleTimeString()
     };
 
     const { body } = await request(app)
