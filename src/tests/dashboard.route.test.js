@@ -38,7 +38,8 @@ describe("dashboard.route.js", () => {
         "bridges"
       ],
       duration: "15",
-      date: "01/04/2020"
+      date: "04/01/2020",
+      time: "5:38:54 PM"
     };
 
     await Workout.create(mockWorkout);
@@ -62,7 +63,8 @@ describe("dashboard.route.js", () => {
           "bridges"
         ],
         duration: 15,
-        date: "02 Apr 2020"
+        date: "02 Apr 2020",
+        time: "5:38:54 PM"
       },
       {
         name: "jane",
@@ -75,7 +77,8 @@ describe("dashboard.route.js", () => {
           "bridges"
         ],
         duration: 15,
-        date: "02 Apr 2020"
+        date: "02 Apr 2020",
+        time: "5:38:54 PM"
       }
     ];
 
@@ -111,7 +114,8 @@ describe("dashboard.route.js", () => {
         "bridges"
       ],
       duration: 15,
-      date: "02 Apr 2020"
+      date: "02 Apr 2020",
+      time: "5:38:54 PM"
     };
 
     const { body } = await request(app)
